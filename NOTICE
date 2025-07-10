@@ -1,0 +1,20 @@
+Gluco-LLM
+Copyright (c) 2025 Gluco-LLM Research Team
+
+This project is based on Time-LLM (https://github.com/KimMeen/Time-LLM)
+Copyright (c) 2024 KimMeen and contributors
+
+Time-LLM: Time Series Forecasting by Reprogramming Large Language Models
+Paper: https://arxiv.org/abs/2310.01728
+Repository: https://github.com/KimMeen/Time-LLM
+
+This project contains modifications and extensions to the original TimeLLM codebase
+for glucose time series forecasting applications.
+
+Additional dependencies and their licenses:
+- PyTorch: Apache License 2.0 (https://github.com/pytorch/pytorch)
+- Transformers: Apache License 2.0 (https://github.com/huggingface/transformers)
+- Accelerate: Apache License 2.0 (https://github.com/huggingface/accelerate)
+- NumPy: BSD License (https://github.com/numpy/numpy)
+- Pandas: BSD License (https://github.com/pandas-dev/pandas)
+- Scikit-learn: BSD License (https://github.com/scikit-learn/scikit-learn) 
