@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# GlucoLLM
-=======
 # Gluco-LLM: Glucose Time Series Forecasting with Large Language Models
 
 A specialized implementation for glucose time series forecasting based on the Time-LLM framework, designed for diabetes management applications.
@@ -171,4 +168,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Contact
 
 For questions and issues, please open an issue on GitHub. 
->>>>>>> master
