@@ -16,7 +16,7 @@ import torch
 import torch.nn as nn
 
 from transformers import LlamaConfig, LlamaModel, LlamaTokenizer, GPT2Config, GPT2Model, GPT2Tokenizer, BertConfig, \
-    BertModel, BertTokenizer
+    BertModel, BertTokenizer, AutoTokenizer, AutoModelForCausalLM, AutoConfig
 from layers.Embed import PatchEmbedding
 import transformers
 from layers.StandardNorm import Normalize
@@ -51,7 +51,6 @@ class Model(nn.Module):
         self.d_llm = configs.llm_dim
         self.patch_len = configs.patch_len
         self.stride = configs.stride
-        
         # === Add: Store age and gender from configs ===
         self.age = getattr(configs, 'age', None)
         self.gender = getattr(configs, 'gender', None)
@@ -167,6 +166,43 @@ class Model(nn.Module):
                     trust_remote_code=True,
                     local_files_only=False
                 )
+        elif configs.llm_model == 'DEEPSEEK':
+            model_name = 'deepseek-ai/deepseek-coder-1.3b-base'
+            print(f"Using device: {self.device}")
+            
+            self.deepseek_config = AutoConfig.from_pretrained(model_name)
+            self.deepseek_config.num_hidden_layers = configs.llm_layers
+            self.deepseek_config.output_attentions = True
+            self.deepseek_config.output_hidden_states = True
+            
+            self.d_llm = self.deepseek_config.hidden_size
+            
+            try:
+                print("Attempting to load Deepseek model...")
+                self.llm_model = AutoModelForCausalLM.from_pretrained(
+                    model_name,
+                    trust_remote_code=True,
+                    local_files_only=False,
+                    config=self.deepseek_config,
+                    torch_dtype=torch.float16,
+                    low_cpu_mem_usage=True
+                ).to(self.device)
+                print(f"Deepseek model loaded successfully! Model dimension: {self.d_llm}")
+            except Exception as e:
+                print(f"Error loading model: {str(e)}")
+                raise
+
+            try:
+                print("Loading tokenizer...")
+                self.tokenizer = AutoTokenizer.from_pretrained(
+                    model_name,
+                    trust_remote_code=True,
+                    local_files_only=False
+                )
+                print("Tokenizer loaded successfully!")
+            except Exception as e:
+                print(f"Error loading tokenizer: {str(e)}")
+                raise
         else:
             raise Exception('LLM model is not defined')
 
@@ -269,7 +305,14 @@ class Model(nn.Module):
         enc_out, n_vars = self.patch_embedding(x_enc.to(torch.bfloat16))
         enc_out = self.reprogramming_layer(enc_out, source_embeddings, source_embeddings)
         llama_enc_out = torch.cat([prompt_embeddings, enc_out], dim=1)
-        dec_out = self.llm_model(inputs_embeds=llama_enc_out).last_hidden_state
+        
+        # Handle different model outputs: DeepSeek uses .logits, others use .last_hidden_state
+        outputs = self.llm_model(inputs_embeds=llama_enc_out)
+        if hasattr(self, 'deepseek_config'):  # DeepSeek model
+            dec_out = outputs.logits
+        else:  # LLAMA, GPT2, BERT models
+            dec_out = outputs.last_hidden_state
+            
         dec_out = dec_out[:, :, :self.d_ff]
 
         dec_out = torch.reshape(
