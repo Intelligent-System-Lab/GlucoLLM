@@ -17,6 +17,13 @@ This project extends the [Time-LLM](https://github.com/KimMeen/Time-LLM) framewo
 - **Comprehensive Evaluation**: Includes MAE, RMSE, and other metrics
 
 
+## Project Demo
+
+The video file is located in the `Demo/` directory of this repository.
+
+**Direct link:** [Watch Demo Video](./Demo/Demo%20Video.mov)
+
+
 ## Installation
 
 ```bash
