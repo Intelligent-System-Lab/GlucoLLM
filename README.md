@@ -150,7 +150,7 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ## Acknowledgement
 
-This project is developed based on [Time-LLM](https://github.com/KimMeen/Time-LLM), which is licensed under the Apache License, Version 2.0.
+This repository is adapted from the [Time-LLM](https://github.com/KimMeen/Time-LLM) project, which is licensed under the Apache License, Version 2.0. We thank the original authors for providing the codebase that enabled this extension to the glucose prediction task.
 
 **Original Time-LLM Paper:**
 Jin, Ming, et al. "Time-LLM: Time series forecasting by reprogramming large language models." International Conference on Learning Representations (ICLR), 2024. [arxiv.org/abs/2310.01728](https://arxiv.org/abs/2310.01728)
