@@ -8,12 +8,16 @@ num_process=4
 batch_size=2
 d_model=8
 d_ff=32
-
+is_training=1
+separate_test=no
+seq_len=432
+label_len=12
+pred_len=6
 comment='TimeLLM-Glucose'
 
 accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 588_bbm_train.csv \
   --test_data_path 588_bbm_test.csv \
@@ -21,10 +25,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
@@ -41,7 +45,7 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
 
 accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 591_bbm_train.csv \
   --test_data_path 591_bbm_test.csv \
@@ -49,10 +53,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
@@ -69,7 +73,7 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
 
   accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 575_bbm_train.csv \
   --test_data_path 575_bbm_test.csv \
@@ -77,10 +81,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
@@ -97,7 +101,7 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
 
   accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 570_bbm_train.csv \
   --test_data_path 570_bbm_test.csv \
@@ -105,10 +109,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
@@ -125,7 +129,7 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
 
 accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 563_bbm_train.csv \
   --test_data_path 563_bbm_test.csv \
@@ -133,10 +137,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
@@ -153,7 +157,7 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
 
   accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_process --main_process_port $master_port run_glucose.py \
   --task_name short_term_forecast \
-  --is_training 1 \
+  --is_training $is_training \
   --root_path ./dataset/glucose/ \
   --data_path 559_bbm_train.csv \
   --test_data_path 559_bbm_test.csv \
@@ -161,10 +165,10 @@ accelerate launch --multi_gpu --mixed_precision bf16 --num_processes $num_proces
   --model $model_name \
   --data Glucose \
   --features S \
-  --separate_test no \
-  --seq_len 432 \
-  --label_len 12 \
-  --pred_len 6 \
+  --separate_test $separate_test \
+  --seq_len $seq_len \
+  --label_len $label_len \
+  --pred_len $pred_len \
   --e_layers 2 \
   --d_layers 1 \
   --factor 3 \
